@@ -1,8 +1,8 @@
 import 'package:AiRi/components/my_cahenetwork_image.dart';
+import 'package:AiRi/pages/detail/detail_view.dart';
+import 'package:AiRi/pages/home/home_model.dart';
 import 'package:AiRi/styles/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:AiRi/model/goods.dart';
-import 'package:AiRi/pages/detail/detail_page.dart';
 import 'package:AiRi/utils/my_navigator.dart';
 
 class CommdityItemHome extends StatelessWidget {
@@ -13,7 +13,8 @@ class CommdityItemHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => MyNavigator.push(DetailPage(goodsId: goodData.goodsId)),
+      //FIXME:goodsId: goodData.goodsId
+      onTap: () => MyNavigator.push(DetailPage(),context: context),
       child: Container(
         height: 240,
         width: (MediaQuery.of(context).size.width - 40) / 2,

@@ -1,11 +1,10 @@
 import 'package:AiRi/components/components.dart';
+import 'package:AiRi/pages/supplier/supplier_view.dart';
 import 'package:AiRi/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:AiRi/components/left_title.dart';
-import 'package:AiRi/model/home.dart';
-import 'package:AiRi/pages/supplier/supplier_page.dart';
 import 'package:AiRi/utils/my_navigator.dart';
-
+import '../home_model.dart';
 
 class BrandSwiper extends StatelessWidget {
   final List<BrandListElement> brandList;
@@ -48,7 +47,8 @@ class BrandSwiper extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () =>
-          MyNavigator.push(SupplierPage(supplierId: brandList[index].name)),
+          //FIXME: supplierId: brandList[index].name
+          MyNavigator.push(SupplierPage()),
       child: Container(
         padding: EdgeInsets.only(right: 25),
         child: Column(

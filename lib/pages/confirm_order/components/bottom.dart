@@ -1,7 +1,7 @@
 import 'package:AiRi/components/components.dart';
+import 'package:AiRi/pages/order_detail/order_detail_view.dart';
 import 'package:AiRi/styles/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:AiRi/pages/order_detail/order_detail_page.dart';
 import 'package:AiRi/utils/my_navigator.dart';
 
 class Bottom extends StatelessWidget {
@@ -9,7 +9,7 @@ class Bottom extends StatelessWidget {
 
   // 弹出对话框
   void _showCancelDialog(BuildContext context) async {
-    MyDialog.showLoading('提交中...', barrier: true);
+    MyDialog.showLoading('提交中...', barrier: true,context: context);
     await Future.delayed(Duration(seconds: 3), () {});
     MyDialog.hideLoading();
 
@@ -38,7 +38,8 @@ class Bottom extends StatelessWidget {
             isCancel: true,
             confirmCallback: () {
               /// 查看订单
-              MyNavigator.pushAndRemove(OrderDetailPage(orderId: "dd"));
+              //FIXME:orderId: "dd"
+              MyNavigator.pushAndRemove(OrderDetailPage(),context: context);
             },
             dismissCallback: () {
               /// 继续采购

@@ -67,7 +67,11 @@ class MyDialog {
   }
 
   static hideLoading() {
-    _entry?.remove();
-    _entry = null;
+    try {
+      _entry?.remove();
+      _entry = null;
+    }catch(e){
+      print('错误$e');
+    }
   }
 }

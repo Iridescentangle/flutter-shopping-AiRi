@@ -1,72 +1,53 @@
-import 'dart:io';
+import 'package:AiRi/global.dart';
 import 'package:AiRi/pages/login/login_page.dart';
+import 'package:AiRi/pages/main/main_view.dart';
+import 'package:AiRi/router/app_pages.dart';
+import 'package:AiRi/utils/my_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:AiRi/styles/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'pages/main/main_page.dart';
-import 'pages/main/store/main_provider.dart';
-import 'pages/shopping_cart/store/shopping_cart_global_provider.dart';
+import 'pages/main/main_binding.dart';
 
-Future<void> main() async {
-  // 判断是否已经登录
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isLogin = prefs.getBool('isLogin') ?? false;
-  print('是否已经登录---' + isLogin.toString());
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => MainProvider()),
-        ChangeNotifierProvider(create: (_) => ShopingCartGlobalProvider()),
-      ],
-      child: MyApp(
-        isLogin: isLogin,
-      ),
-    ),
-  );
-  // 透明状态栏
-  if (Platform.isAndroid) {
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-  }
-}
+void main() => Global.init().then((e) => runApp(MyApp()));
 
 class MyApp extends StatelessWidget {
-  final isLogin;
-  const MyApp({Key? key, this.isLogin}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MyNavigator.ctx = context;
     return OKToast(
       child: RefreshConfiguration(
         hideFooterWhenNotFull: true, // Viewport不满一屏时,禁用上拉加载更多功能
         enableBallisticLoad: true, // 可以通过惯性滑动触发加载更多
-        child: MaterialApp(
+        child: GetMaterialApp(
           title: 'AiRi',
+          initialBinding: MainBinding(),
+          enableLog: true,
+          getPages: AppPages.routes,
+          unknownRoute: AppPages.unknownRoute,
+          debugShowCheckedModeBanner: false,
+          home: Global.isLogin ? MainPage() : LoginPage(),
           localizationsDelegates: [
             RefreshLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          supportedLocales: [
-            const Locale('en'),
-            const Locale('zh'),
-          ],
-          localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
-            return locale;
-          },
+          // supportedLocales: [
+          //   const Locale('en'),
+          //   const Locale('zh'),
+          // ],
+          // localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
+          //   return locale;
+          // },
           theme: ThemeData(
             primarySwatch: Colors.purple,
             primaryColor: AppColors.primaryColor,
-            accentColor: AppColors.primaryColorAccent,
+            // accentColor: AppColors.primaryColorAccent,
           ),
-          debugShowCheckedModeBanner: false,
-          home: isLogin ? MainPage() : LoginPage(),
         ),
       ),
     );

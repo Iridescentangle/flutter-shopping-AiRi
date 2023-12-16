@@ -1,10 +1,11 @@
 import 'package:AiRi/components/my_cahenetwork_image.dart';
+import 'package:AiRi/pages/detail/detail_view.dart';
+import 'package:AiRi/pages/home/home_model.dart';
+import 'package:AiRi/router/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:AiRi/model/goods.dart';
-import 'package:AiRi/pages/detail/detail_page.dart';
-
 import 'package:AiRi/styles/colors.dart';
 import 'package:AiRi/utils/my_navigator.dart';
+import 'package:get/get.dart';
 
 class CommdityItem extends StatelessWidget {
   final GoodsList goodData;
@@ -14,7 +15,8 @@ class CommdityItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => MyNavigator.push(DetailPage(goodsId: goodData.goodsId)),
+      //FIXME:goodsId: goodData.goodsId
+      onTap: () => Get.toNamed(AppRoutes.Detail),
       child: Container(
         height: 140,
         // color: Colors.red,
@@ -53,10 +55,7 @@ class CommdityItem extends StatelessWidget {
                 '优衣库官方旗舰店',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Color(0xFF999999),
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(color: Color(0xFF999999), fontSize: 12.0, fontWeight: FontWeight.w400),
               ),
             ),
             Positioned(

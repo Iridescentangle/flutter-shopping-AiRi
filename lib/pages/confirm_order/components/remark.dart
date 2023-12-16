@@ -13,7 +13,7 @@ class _RemarkState extends State<Remark> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 86,
+      // height: 86,
       padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
       decoration: BoxDecoration(
         color: Colors.white,

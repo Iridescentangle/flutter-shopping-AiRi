@@ -104,7 +104,7 @@ class _CustomDialogState extends State<CustomDialog> {
                         decoration: BoxDecoration(
                             color: widget.cancelColor == null ? Color(0xFFFFFFFF) : widget.cancelColor,
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0))),
-                        child: FlatButton(
+                        child: TextButton(
                           child: Text(widget.cancelContent ?? '取消',
                               style: TextStyle(
                                 fontSize: 16.0,
@@ -114,8 +114,6 @@ class _CustomDialogState extends State<CustomDialog> {
                                     : Color(0xFFFFFFFF),
                               )),
                           onPressed: _dismissDialog,
-                          splashColor: widget.cancelColor == null ? Color(0xFFFFFFFF) : widget.cancelColor,
-                          highlightColor: widget.cancelColor == null ? Color(0xFFFFFFFF) : widget.cancelColor,
                         ),
                       )
                     : Text(''),
@@ -131,7 +129,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           ? BorderRadius.only(bottomRight: Radius.circular(16.0))
                           : BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
                     ),
-                    child: FlatButton(
+                    child: TextButton(
                       onPressed: _confirmDialog,
                       child: Text(widget.confirmContent ?? '确定',
                           style: TextStyle(
@@ -141,8 +139,6 @@ class _CustomDialogState extends State<CustomDialog> {
                                 ? (widget.confirmTextColor == null ? Colors.black87 : widget.confirmTextColor)
                                 : Color(0xFFFFFFFF),
                           )),
-                      splashColor: widget.confirmColor == null ? Color(0xFFFFFFFF) : widget.confirmColor,
-                      highlightColor: widget.confirmColor == null ? Color(0xFFFFFFFF) : widget.confirmColor,
                     ),
                   ),
                   flex: 1),

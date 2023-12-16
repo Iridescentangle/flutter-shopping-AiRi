@@ -1,11 +1,11 @@
 import 'package:AiRi/components/my_cahenetwork_image.dart';
+import 'package:AiRi/pages/main/main_controller.dart';
+import 'package:AiRi/pages/search/search_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:AiRi/model/home.dart';
-import 'package:AiRi/pages/main/store/main_provider.dart';
-import 'package:AiRi/pages/search/search_page.dart';
 import 'package:AiRi/utils/my_navigator.dart';
+import 'package:get/get.dart';
 import '../../../styles/colors.dart';
+import '../home_model.dart';
 
 class CommodityCateGory extends StatelessWidget {
   final List<BrandListElement> cateGoryList;
@@ -13,15 +13,16 @@ class CommodityCateGory extends StatelessWidget {
 
   ///////////////////////////////
   List<Widget> _buildGridItem(BuildContext context) {
-    final mainProvder = Provider.of<MainProvider>(context, listen: false);
+    final MainController mainState = Get.find();
 
     List<Widget> gridItemList = [];
     for (int i = 0; i <= cateGoryList.length; i++) {
       gridItemList.add(
         GestureDetector(
           onTap: i == cateGoryList.length
-              ? () => {mainProvder.setTabBarSelectedIndex = 1}
-              : () => MyNavigator.push(SearchPage(title: cateGoryList[i].name, keyword: cateGoryList[i].name)),
+              ? () => mainState.setTabBarSelectedIndex = 1
+              //FIXME:title: cateGoryList[i].name, keyword: cateGoryList[i].name
+              : () => MyNavigator.push(SearchPage()),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

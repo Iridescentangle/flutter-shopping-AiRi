@@ -23,7 +23,7 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
           key: key,
           title: title,
           centerTitle: centerTitle,
-          brightness: brightness ?? Brightness.light,
+          // brightness: brightness ?? Brightness.light,
           backgroundColor: backgroundColor ?? Color(0xfffefefe),
           leading: leading ??
               (leadingType == AppBarBackType.None
